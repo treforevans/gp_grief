@@ -1,0 +1,61 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.mat
+*his.dat
+*.h5
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backups #
+###########
+*~
+*.asv
+*.swp
+
+# Images and Figures #
+######################
+*.fig
+*.png
+*.jpg
+*.jpeg
+*.avi
+*.eps
+
+# Checkpoints and workspace files
+# ################
+.ipynb_checkpoints/
+octave-workspace
