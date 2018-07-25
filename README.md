@@ -5,8 +5,8 @@ Large Scale Gaussian Processes using Grid-Structured Eigenfunction (GRIEF) kerne
 Only python 2 is supported.
 An up-to-date Anaconda distribution is recommended in addition to the following non-standard dependencies (using `pip`):
 ```
-pip install tabulate
-pip install GPy # v1.6.1 tested but other versions should work
+pip install GPy==1.6.1 # v1.6.1 tested but other versions should also work
+pip install tabulate # this is a lightweight package used for printing
 ```
 Also required is the forked version of the `py-mcmc` library:
 ```
@@ -16,8 +16,8 @@ python setup.py install
 ```
 
 # Tutorials & Examples
-* [Type-II inference with GRIEF kernels:](./tutorials/Type-II example with GRIEF kernel.ipynb) This example demonstrates the type-II training and inference procedure with GP-GRIEF.
-* [Type-I inference with GRIEF kernels:](./tutorials/Type-I example with GRIEF kernel) This example demonstrates how to perform fully Bayesian type-I inferece with MCMC in a time complexity independent of the quantity of training data.
+* [Type-II inference with GRIEF kernels:](./tutorials/Type-II%20example%20with%20GRIEF%20kernel.ipynb) This example demonstrates the type-II training and inference procedure with GP-GRIEF.
+* [Type-I inference with GRIEF kernels:](./tutorials/Type-I%20example%20with%20GRIEF%20kernel.ipynb) This example demonstrates how to perform fully Bayesian type-I inference with a runtime that is independent of the training dataset size.
 
 # Citation
 The underlying algorithms are based on the 2018 ICML paper:
