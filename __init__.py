@@ -23,7 +23,7 @@ def debug():
 
 
 __all__ = filter(lambda s:not s.startswith('_'), dir())
-__version__ = '1.0'
+__version__ = '1.0+'
 
 # set up logging (note if a handler has already been set then this won't do anything)
 import logging
