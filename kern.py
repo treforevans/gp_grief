@@ -46,36 +46,6 @@ class BaseKernel(object):
         x,z = self._process_cov_inputs(x,z) # process inputs
         raise NotImplementedError('Not implemented')
 
-
-    def cov_first_der(self,x,z=None):
-        """
-        Evaluate the derivative of the covariance kernel at points to form a covariance matrix
-
-        Inputs:
-            x : array of shape (N, d)
-            z : array of shape (M, d) (optional). If not specified then will assume z=x
-
-        Outputs:
-            k : matrix of shape (d, N, M)
-        """
-        x,z = self._process_cov_inputs(x,z) # process inputs
-        raise NotImplementedError('Not implemented')
-
-
-    def cov_second_der(self,x,z=None):
-        """
-        Evaluate covariance kernel at points to form a covariance matrix
-
-        Inputs:
-            x : array of shape (N, d)
-            z : array of shape (M, d) (optional). If not specified then will assume z=x
-
-        Outputs:
-            k : matrix of shape (d, d, N, M)
-        """
-        x,z = self._process_cov_inputs(x,z) # process inputs
-        raise NotImplementedError('Not implemented')
-
     @property
     def parameters(self):
         """
