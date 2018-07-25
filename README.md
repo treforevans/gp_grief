@@ -20,7 +20,7 @@ python setup.py install
 * [Type-I inference with GRIEF kernels:](./tutorials/Type-I%20example%20with%20GRIEF%20kernel.ipynb) This example demonstrates how to perform fully Bayesian type-I inference with a runtime that is independent of the training dataset size.
 
 # Citation
-The underlying algorithms are based on the 2018 ICML paper:
+The underlying algorithms are based on the following 2018 ICML paper (found [here](https://arxiv.org/abs/1807.02125)):
 
 ```
 @InProceedings{evans_gp-grief,
