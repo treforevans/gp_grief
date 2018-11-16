@@ -26,7 +26,7 @@ The underlying algorithms are based on the following 2018 ICML paper (found [her
 @InProceedings{evans_gp-grief,
   title={Scalable {G}aussian Processes with Grid-Structured Eigenfunctions ({GP}-{GRIEF})},
   author={Evans, Trefor W and Nair, Prasanth B},
-  booktitle ={International Conference on Machine Learning},
+  booktitle={International Conference on Machine Learning},
   pages={1416--1425},
   year={2018}
 }
