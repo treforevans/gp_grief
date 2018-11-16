@@ -497,7 +497,7 @@ class PyMCMC_Wrapper(pymcmc_model):
         return self._state['grad_log_prior_transformed'][self.free]
 
 
-    def predict(self, Xnew, return_samples=False):
+    def predict(self, Xnew, return_samples=False, diag_cov=False):
         """
         predict at test points.
 
@@ -506,6 +506,7 @@ class PyMCMC_Wrapper(pymcmc_model):
             return_samples : bool, whether to output all samples or just mean and var (see below)
                 Note that this can be memory intensive if many samples. If false then doesn't need
                 to store each sample.
+            diag_cov : whether or not to just compute the diagonal covariance or the full covariance.
 
         Outputs if return_samples:
             Ysample_means : (n_test, n_samples) mean prediction at the test points for each hyperparmeter sample
@@ -517,13 +518,19 @@ class PyMCMC_Wrapper(pymcmc_model):
         """
         assert self.param_chain is not None, "sampling has not yet been done"
         if return_samples:
+            if diag_cov:
+                compute_var = "diag"
+                Ysample_vars = np.zeros((Xnew.shape[0], 1, self.param_chain.shape[0]))
+            else:
+                compute_var = True
+                Ysample_vars = np.zeros((Xnew.shape[0], Xnew.shape[0], self.param_chain.shape[0]))
             Ysample_means = np.zeros((Xnew.shape[0], self.param_chain.shape[0]))
-            Ysample_vars = np.zeros((Xnew.shape[0], Xnew.shape[0], self.param_chain.shape[0]))
             for i,param in enumerate(self.param_chain):
                 self.model.parameters = param
-                Ysample_means[:,(i,)], Ysample_vars[:,:,i] = self.model.predict(Xnew, compute_var=True)
+                Ysample_means[:,(i,)], Ysample_vars[:,:,i] = self.model.predict(Xnew, compute_var=compute_var)
             return Ysample_means, Ysample_vars
         else: # just compute the mean
+            assert not diag_cov, "covariance not implemented unless returning samples"
             smv = StreamMeanVar(ddof=0)
             for i,param in enumerate(self.param_chain):
                 self.model.parameters = param
@@ -1079,9 +1086,12 @@ class GPweb(BaseModel):
         Yhat = Phi_new.dot(self._alpha_p)
 
         # predict the variance at the test points
-        if compute_var:
-            Yhatvar = self.noise_var*Phi_new.dot(cho_solve(self._Pchol, Phi_new.T)) + self.noise_var*np.eye(Phi_new.shape[0])# see 2.11 of GPML
+        if compute_var == 'diag':
+            Yhatvar = self.noise_var*np.sum(Phi_new * cho_solve(self._Pchol, Phi_new.T).T, axis=1, keepdims=True) + self.noise_var
             return Yhat,Yhatvar
+        elif compute_var:
+            Yhatcov = self.noise_var*Phi_new.dot(cho_solve(self._Pchol, Phi_new.T)) + self.noise_var*np.eye(Phi_new.shape[0])# see 2.11 of GPML
+            return Yhat,Yhatcov
         else: # just return the mean
             return Yhat
 
